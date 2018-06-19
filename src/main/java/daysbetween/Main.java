@@ -8,7 +8,10 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		while (true) {
 			String line = sc.nextLine();
-			System.out.println(line);
+			
+//			if (line.trim().length() == 0) continue;
+			
+			System.out.println("Output(Days): " + DaysBetweenCalculator.calculateDaysBetweenDates(line.split(" ")[0], line.split(" ")[1]));
 		}
 	}
 

@@ -59,4 +59,25 @@ public class DaysBetweenCalculatorTest {
 		
 	}
 	
+	@Test
+	public void testDaysBetweenStartAfterEnd() {
+		LocalDate startDate = LocalDate.of(1950, 1, 1);
+		LocalDate endDate = LocalDate.of(1901, 12, 31);
+		
+		while (!startDate.isAfter(endDate)) {
+			long expected = Math.max(ChronoUnit.DAYS.between(startDate, endDate) - 1, 0);
+			
+			long actual = DaysBetweenCalculator.calculateDaysBetweenDates(startDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), 
+															endDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+			
+			assertEquals(expected, actual);
+			
+			// move start and end date 1 day closer to each other
+			startDate = startDate.minusDays(1);
+			endDate = endDate.plusDays(1);
+			//System.out.println(startDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) + " " + endDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+		}
+		
+	}
+	
 }
